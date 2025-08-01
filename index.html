@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#3a7bd5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-128x128.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>PAC Monitor - AI Enhanced</title>
+  <style>
+    /* TUTTO IL CSS - come nei messaggi precedenti / puoi incollare il CSS fornito sopra qui per intero */
+    :root {
+      --primary: #3a7bd5;
+      --secondary: #00d2ff;
+      --accent: #00bcd4;
+      --light: #ffffff;
+      --dark: #333333;
+      --gray: #f0f0f0;
+      --darker-gray: #e0e0e0;
+      --error: #ff6b6b;
+      --success: #4caf50;
+      --warning: #ff9800;
+      --touch-min: 48px;
+      --sidebar-width: 280px;
+      --nav-height: 60px;
+      --ai-color: #6a11cb;
+    }
+    /* [Incolla il CSS già fornito nei messaggi precedenti qui]* */
+    /* ... Per motivi di spazio, si consiglia incollare il CSS precedente senza tagli ... */
+  </style>
+</head>
+<body>
+  <!-- Sidebar laterale -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h3>Strumenti</h3>
+      <button class="close-sidebar" id="closeSidebar" aria-label="Chiudi menu laterale">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="tools-section">
+      <h4><i class="fas fa-calculator"></i> Calcolatori</h4>
+      <button class="tool-button"><i class="fas fa-percentage"></i> Calcolatore Tasse</button>
+      <button class="tool-button"><i class="fas fa-chart-line"></i> Calcolatore Rendimento</button>
+      <button class="tool-button"><i class="fas fa-euro-sign"></i> Calcolatore Valuta</button>
+    </div>
+    <div class="tools-section">
+      <h4><i class="fas fa-file-import"></i> Importazione</h4>
+      <button class="tool-button"><i class="fas fa-file-csv"></i> Importa CSV</button>
+      <button class="tool-button"><i class="fas fa-file-excel"></i> Importa Excel</button>
+      <button class="tool-button"><i class="fas fa-file-pdf"></i> Importa PDF</button>
+    </div>
+    <div class="tools-section">
+      <h4><i class="fas fa-file-export"></i> Esportazione</h4>
+      <button class="tool-button"><i class="fas fa-file-csv"></i> Esporta CSV</button>
+      <button class="tool-button"><i class="fas fa-file-excel"></i> Esporta Excel</button>
+      <button class="tool-button"><i class="fas fa-file-pdf"></i> Esporta PDF</button>
+    </div>
+    <div class="tools-section">
+      <h4><i class="fas fa-cog"></i> Impostazioni</h4>
+      <button class="tool-button"><i class="fas fa-user"></i> Profilo</button>
+      <button class="tool-button"><i class="fas fa-bell"></i> Notifiche</button>
+      <button class="tool-button"><i class="fas fa-shield-alt"></i> Sicurezza</button>
+    </div>
+    <div class="tools-section">
+      <h4><i class="fas fa-robot"></i> Assistenza AI</h4>
+      <button class="tool-button" id="aiAnalytics">
+        <i class="fas fa-chart-bar"></i> Analisi Portafoglio
+      </button>
+      <button class="tool-button" id="aiForecast">
+        <i class="fas fa-crystal-ball"></i> Previsioni di Mercato
+      </button>
+      <button class="tool-button" id="aiOptimizer">
+        <i class="fas fa-magic"></i> Ottimizzazione Automatica
+      </button>
+    </div>
+  </div>
+  <!-- Contenitore principale -->
+  <div class="app-container">
+    <!-- Schermata Mercato -->
+    <section id="marketScreen" class="screen active">
+      <div class="screen-header">
+        <h2 class="screen-title"><i class="fas fa-chart-line"></i> Mercato</h2>
+        <button class="menu-button" id="openSidebar" aria-label="Apri menu laterale">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <div class="ai-panel">
+        <div class="ai-header">
+          <i class="fas fa-brain"></i>
+          <h3>Analisi AI del Mercato</h3>
+        </div>
+        <div class="ai-content">
+          <div class="ai-insight">
+            <h4><i class="fas fa-lightbulb"></i> Trend Attuale</h4>
+            <p>I mercati globali mostrano una tendenza al rialzo (+1.8% mensile). Settori tecnologici in forte crescita (+5.2%) grazie ai risultati positivi delle big tech.</p>
+            <div class="ai-tag">Opportunità di investimento</div>
+          </div>
+          <div class="ai-insight">
+            <h4><i class="fas fa-exclamation-triangle"></i> Rischio Valutario</h4>
+            <p>L'EUR/USD è sceso dello 0.4% nell'ultima settimana. Si prevede una possibile ulteriore flessione del 0.8% nei prossimi giorni a causa delle tensioni geopolitiche.</p>
+            <div class="ai-tag">Attenzione</div>
+          </div>
+          <div class="ai-insight">
+            <h4><i class="fas fa-chart-pie"></i> Asset Consigliati</h4>
+            <p>In base al tuo profilo di rischio, l'AI consiglia di considerare ETF su energie rinnovabili e titoli tecnologici con buoni dividendi per diversificare.</p>
+            <div class="ai-action">
+              <button class="ai-btn">Vedi dettagli <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="market-grid">
+        <div class="market-card">
+          <div class="ai-alert">
+            <i class="fas fa-bell"></i>
+            <div>L'AI ha rilevato un potenziale rialzo del 3% nelle prossime 2 settimane</div>
+          </div>
+          <div class="market-card-header">
+            <h4><i class="fas fa-globe-europe"></i> Indici Globali</h4>
+            <span class="market-change positive"><i class="fas fa-caret-up"></i> +1.2%</span>
+          </div>
+          <div class="market-value">€ 4,851.23</div>
+          <div class="market-info">MSCI World Index</div>
+        </div>
+        <div class="market-card">
+          <div class="ai-alert">
+            <i class="fas fa-bell"></i>
+            <div>Possibile volatilità in arrivo sulle materie prime segnalata dall'AI</div>
+          </div>
+          <div class="market-card-header">
+            <h4><i class="fas fa-coins"></i> Materie Prime</h4>
+            <span class="market-change negative"><i class="fas fa-caret-down"></i> -0.9%</span>
+          </div>
+          <div class="market-value">€ 1,225.44</div>
+          <div class="market-info">Bloomberg Commodity Index</div>
+        </div>
+      </div>
+    </section>
+    <!-- Schermata Portafoglio -->
+    <section id="portfolioScreen" class="screen">
+      <div class="screen-header">
+        <h2 class="screen-title"><i class="fas fa-wallet"></i> Portafoglio</h2>
+      </div>
+      <div class="portfolio-summary">
+        <div class="portfolio-value">€ 41,500.80</div>
+        <div class="portfolio-stats">
+          <div class="stat-card">
+            <div class="stat-value">+9.3%</div>
+            <div class="stat-label">Rendimento YTD</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">17</div>
+            <div class="stat-label">Asset detenuti</div>
+          </div>
+        </div>
+        <div class="performance-chart">(Grafico andamento - integra con Chart.js)</div>
+      </div>
+      <div class="asset-list">
+        <div class="asset-item">
+          <div class="asset-info">
+            <div class="asset-name">MSCI World ETF</div>
+            <div class="asset-meta">Etf Azionario Globale</div>
+          </div>
+          <div>
+            <div class="asset-value">€ 12,100</div>
+            <div class="asset-change positive">+5.1%</div>
+          </div>
+        </div>
+        <!-- altri asset... -->
+      </div>
+    </section>
+    <!-- Schermata Strumenti -->
+    <section id="toolsScreen" class="screen">
+      <div class="screen-header">
+        <h2 class="screen-title"><i class="fas fa-tools"></i> Strumenti</h2>
+      </div>
+      <div class="tools-container">
+        <div class="tool-card"><i class="fas fa-percentage tool-icon"></i><h4>Calcolatore Tasse</h4></div>
+        <div class="tool-card"><i class="fas fa-chart-line tool-icon"></i><h4>Calcolatore Rendimento</h4></div>
+        <div class="tool-card"><i class="fas fa-euro-sign tool-icon"></i><h4>Calcolatore Valuta</h4></div>
+        <!-- altri strumenti -->
+      </div>
+    </section>
+  </div>
+  <!-- Navbar mobile/reactive -->
+  <div class="nav-bar">
+    <a class="nav-item active" data-screen="marketScreen"><i class="fas fa-chart-line"></i> Mercato</a>
+    <a class="nav-item" data-screen="portfolioScreen"><i class="fas fa-wallet"></i> Portafoglio</a>
+    <a class="nav-item" data-screen="toolsScreen"><i class="fas fa-tools"></i> Strumenti</a>
+  </div>
+  <!-- Script PWA & UI -->
+  <script>
+    // Navbar e cambio screen
+    const navItems = document.querySelectorAll('.nav-item');
+    const screens = document.querySelectorAll('.screen');
+    const sidebar = document.getElementById('sidebar');
+    const openSidebarBtn = document.getElementById('openSidebar');
+    const closeSidebarBtn = document.getElementById('closeSidebar');
+
+    navItems.forEach(item => {
+      item.onclick = () => {
+        navItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        screens.forEach(s => s.classList.remove('active'));
+        document.getElementById(item.getAttribute('data-screen')).classList.add('active');
+        sidebar.classList.remove('active');
+      };
+    });
+
+    openSidebarBtn.onclick = () => { sidebar.classList.add('active'); };
+    closeSidebarBtn.onclick = () => { sidebar.classList.remove('active'); };
+
+    // Demo: aggiorna variazioni mercato ogni pochi secondi 
+    function aggiornaMarketData() {
+      document.querySelectorAll('.market-change').forEach(el => {
+        const perc = (Math.random() * 3 - 1).toFixed(1);
+        el.innerHTML = (perc > 0 ? '<i class="fas fa-caret-up"></i> +' : '<i class="fas fa-caret-down"></i> ') + perc + '%';
+        el.className = 'market-change ' + (perc >= 0 ? 'positive' : 'negative');
+      });
+    }
+    setInterval(aggiornaMarketData, 12000);
+
+    // Service Worker (PWA)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
+  </script>
+</body>
+</html>
